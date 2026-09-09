@@ -1,0 +1,17 @@
+# Manual smoke test for the kids_illustrator network.
+# This invokes paid OpenAI tools and is intentionally not in the default suite.
+{
+    "agent": "experimental/kids_illustrator",
+    "connections": ["direct"],
+    "timeout_in_seconds": 600,
+    "interactions": [
+        {
+            "text": "Create a simple four-panel comic for children about a friendly robot helping a lost duck find its pond. Keep the dialogue short and age-appropriate.",
+            "response": {
+                "text": {
+                    "gist": "The assistant returns a completed or described comic page with a child-friendly robot and duck story, including panels, dialogue, captions, or generated artwork."
+                }
+            }
+        }
+    ]
+}

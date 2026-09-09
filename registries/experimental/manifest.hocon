@@ -31,6 +31,7 @@
     # Set the following agent network to true before running apps/log_analyzer/log_analyzer.py
     "experimental/log_analysis_agents.hocon": false,
     "experimental/six_thinking_hats.hocon": true,
+    "experimental/kids_illustrator.hocon": true,
     "experimental/cruse_theme_agent.hocon": {
         # This is a support network for Cruse Interface
         # We want it served up, but not listed as a public agent network

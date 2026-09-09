@@ -53,6 +53,8 @@ Here are a few examples ordered by level of complexity.
     - [Visual Question Answering](#visual-question-answering)
     - [Persistent Memory (Local)](#persistent-memory-local)
     - [Persistent Memory (Mem0)](#persistent-memory-mem0)
+  - [🎨 Generated Agent Networks](#-generated-agent-networks)
+    - [Kids Illustrator](#kids-illustrator)
   - [🏢 Industry-Specific Examples](#-industry-specific-examples)
     - [Intranet Agents](#intranet-agents)
     - [Intranet Agents With Tools](#intranet-agents-with-tools)
@@ -445,6 +447,18 @@ memories by `user_id`. Use it when you need per-user scoping or a multi-host dep
 requires `pip install "mem0ai>=2.0.2,<3.0"` and the `MEM0_API_KEY` environment variable.
 
 **Tags:** `tool`, `middleware`, `memory`, `mem0`, `cloud`
+
+## 🎨 Generated Agent Networks
+
+Networks created for focused demonstrations and hackathon projects.
+
+### Kids Illustrator
+
+[Kids Illustrator](examples/kids_illustrator.md) is a child-safe multi-agent comic studio that coordinates story writing,
+art direction, image generation, and page layout. It demonstrates how a front man can pass structured creative work
+through specialized agents and OpenAI tools.
+
+**Tags:** `kids`, `comic`, `illustration`, `image generation`, `OpenAI`, `multi-agent`
 
 ## 🏢 Industry-Specific Examples
 
