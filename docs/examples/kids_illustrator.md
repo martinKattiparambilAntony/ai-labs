@@ -7,7 +7,8 @@ The **Kids Illustrator** agent network turns a story idea into an illustrated co
 3. **Art Director** turns each panel into a detailed image-generation prompt and tracks visual continuity.
 4. **Illustrator** generates panel images with OpenAI Image Generation.
 5. **Layout Editor** arranges panels and adds dialogue, captions, and sound effects.
-6. **Front Man** coordinates the sequence and returns the completed page.
+6. **PDF Exporter** uses Code Interpreter to compose and save the final downloadable PDF.
+7. **Front Man** coordinates the sequence and returns the completed file attachment.
 
 ## File
 
@@ -37,7 +38,7 @@ Make a funny adventure comic for ages 8-10 about a hamster detective in a pet st
 Turn this story idea into a colorful comic page: two friends discover a talking tree at recess.
 ```
 
-Generated image files are produced by the OpenAI image tool according to its configured file-saving behavior. The actual model response can vary, so the sample prompts are intended to demonstrate the workflow rather than guarantee identical artwork.
+The successful response should contain a downloadable `kids_illustrator_comic.pdf` attachment. The PDF Exporter is explicitly instructed not to paste PDF bytes or base64 into chat. Generated image files are produced by the OpenAI image tool according to its configured file-saving behavior. The actual model response can vary, so the sample prompts are intended to demonstrate the workflow rather than guarantee identical artwork.
 
 ## Testing
 
@@ -55,7 +56,7 @@ User
             -> art_director
             -> illustrator -> openai_image_generation
             -> layout_editor
-            -> openai_code_interpreter (when formatting or data processing is needed)
+            -> pdf_exporter -> openai_code_interpreter
 ```
 
 The network keeps story text and visual prompts separate from image generation, which makes each creative stage inspectable for review and easier to revise independently.

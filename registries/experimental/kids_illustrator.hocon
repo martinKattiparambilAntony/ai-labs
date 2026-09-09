@@ -99,8 +99,27 @@ Typesetter and compositor that assembles panels, adds speech bubbles, captions, 
 2. Arrange panels into a dynamic grid of 4-6 panels per page appropriate for the story flow.
 3. Create speech bubbles, caption boxes, and SFX typography using kid-friendly comic fonts.
 4. Overlay text onto the corresponding panels, ensuring readability and proper placement.
-5. Produce the final composited page in a high-resolution format ready for printing or digital distribution.
+5. Produce the final composited pages in a high-resolution format ready for printing or digital distribution.
+6. Pass the completed pages, panel assets, and script to the PDF Exporter.
 """,
+        },
+        {
+            "name": "pdf_exporter",
+            "function": ${aaosa_call}{
+                "description": """
+Creates the final downloadable PDF comic from the composed pages, panel artwork, and script.
+                """
+            },
+            "instructions": ${instructions_prefix} ${demo_mode} """
+1. Receive the completed comic pages, panel artwork, and script from the Layout Editor.
+2. Use the OpenAI Code Interpreter to create a real PDF file named `kids_illustrator_comic.pdf`.
+3. Include the storyboard overview, panel guide, color palette, and all illustrated story pages with captions, speech bubbles, and SFX.
+4. Save the PDF as an output artifact in the Code Interpreter container.
+5. Return the generated PDF file as a downloadable file attachment and also state its exact filename.
+6. Never paste PDF bytes or base64 data into the chat. Never provide Python decoding instructions instead of the file.
+7. If PDF creation fails, report the failure clearly and do not claim that a downloadable PDF was created.
+""",
+            "tools": ["openai_code_interpreter"]
         },
         {
             "name": "openai_code_interpreter",
@@ -119,12 +138,14 @@ Coordination hub that routes tasks between agents and invokes OpenAI tools as ne
             },
             "instructions": ${instructions_prefix} """
 1. Accept the initial request and forward the story concept to the Orchestrator.
-2. Sequentially invoke Author, Art Director, Illustrator, and Layout Editor, passing outputs as inputs.
-3. Use OpenAI Code Interpreter for data processing or formatting tasks.
+2. Sequentially invoke Author, Art Director, Illustrator, Layout Editor, and PDF Exporter, passing outputs as inputs.
+3. Use OpenAI Code Interpreter for PDF creation and other data processing or formatting tasks.
 4. Use OpenAI Image Generation when direct image creation is required.
-5. Collect the final comic page from the Layout Editor and return it to the user.
+5. Do not answer with base64, PDF bytes, or a textual description in place of the artifact.
+6. Return the PDF Exporter's `kids_illustrator_comic.pdf` file attachment to the user, along with a short confirmation.
+7. Only claim that the PDF is ready when the file artifact is present in the tool result.
 """ ${aaosa_instructions},
-            "tools": ["author", "art_director", "illustrator", "layout_editor", "openai_code_interpreter", "openai_image_generation"]
+            "tools": ["author", "art_director", "illustrator", "layout_editor", "pdf_exporter", "openai_code_interpreter", "openai_image_generation"]
         },
     ]
 }
